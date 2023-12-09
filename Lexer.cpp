@@ -82,71 +82,71 @@ void Lexer::next(Token &token) {
         // }
 
         int mode;
-        if (*(BufferPtr + 1) == '+' && *(BufferPtr + 2) == '=') {
+        if (*BufferPtr == '+' && *(BufferPtr + 2) == '=') {
             mode = 2;
             Token::TokenKind kind = Token::plusequal;
         }
-        else if (*(BufferPtr + 1) == '-' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '-' && *(BufferPtr + 2) == '='){
             mode = 2;
             Token::TokenKind kind = Token::minusequal;
         }
-        else if (*(BufferPtr + 1) == '/' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '/' && *(BufferPtr + 2) == '='){
             mode = 2;
             Token::TokenKind kind = Token::slashequal;
         }
-        else if (*(BufferPtr + 1) == '%' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '%' && *(BufferPtr + 2) == '='){
             mode = 2;
             Token::TokenKind kind = Token::percentequal;
         }
-        else if (*(BufferPtr + 1) == '*' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '*' && *(BufferPtr + 2) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::starequal;
         }
-        else if (*(BufferPtr + 1) == '>' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '>' && *(BufferPtr + 2) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::greaterequal;
         }
-        else if (*(BufferPtr + 1) == '<' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '<' && *(BufferPtr + 2) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::lessequal;
         }
-        else if (*(BufferPtr + 1) == '=' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '=' && *(BufferPtr + 2) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::equalequal;
         }
-        else if (*(BufferPtr + 1) == '!' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '!' && *(BufferPtr + 2) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::notqeual;
         }
-        else if (*(BufferPtr + 1) == '+'){
+        else if (*BufferPtr == '+'){
             mode = 1;            
             Token::TokenKind kind = Token::plus;
         }
-        else if (*(BufferPtr + 1) == '-'){
+        else if (*BufferPtr == '-'){
             mode = 1;            
             Token::TokenKind kind = Token::minus;
         }
-        else if (*(BufferPtr + 1) == '/'){
+        else if (*BufferPtr == '/'){
             mode = 1;            
             Token::TokenKind kind = Token::slash;
         }
-        else if (*(BufferPtr + 1) == '%'){
+        else if (*BufferPtr == '%'){
             mode = 1;
             Token::TokenKind kind = Token::percent;
         }
-        else if (*(BufferPtr + 1) == '*'){
+        else if (*BufferPtr == '*'){
             mode = 1;
             Token::TokenKind kind = Token::star;
         }
-        else if (*(BufferPtr + 1) == '>'){
+        else if (*BufferPtr == '>'){
             mode = 1;
             Token::TokenKind kind = Token::greater;
         }
-        else if (*(BufferPtr + 1) == '<'){
+        else if (*BufferPtr == '<'){
             mode = 1;
             Token::TokenKind kind = Token::less;
         }
-        else if (*(BufferPtr + 1) == '='){
+        else if (*BufferPtr == '='){
             mode = 1;
             Token::TokenKind kind = Token::equal;
         }
