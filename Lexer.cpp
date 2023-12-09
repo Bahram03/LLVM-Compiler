@@ -82,39 +82,39 @@ void Lexer::next(Token &token) {
         // }
 
         int mode;
-        if (*BufferPtr == '+' && *(BufferPtr + 2) == '=') {
+        if (*BufferPtr == '+' && *(BufferPtr + 1) == '=') {
             mode = 2;
             Token::TokenKind kind = Token::plusequal;
         }
-        else if (*BufferPtr == '-' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '-' && *(BufferPtr + 1) == '='){
             mode = 2;
             Token::TokenKind kind = Token::minusequal;
         }
-        else if (*BufferPtr == '/' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '/' && *(BufferPtr + 1) == '='){
             mode = 2;
             Token::TokenKind kind = Token::slashequal;
         }
-        else if (*BufferPtr == '%' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '%' && *(BufferPtr + 1) == '='){
             mode = 2;
             Token::TokenKind kind = Token::percentequal;
         }
-        else if (*BufferPtr == '*' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '*' && *(BufferPtr + 1) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::starequal;
         }
-        else if (*BufferPtr == '>' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '>' && *(BufferPtr + 1) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::greaterequal;
         }
-        else if (*BufferPtr == '<' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '<' && *(BufferPtr + 1) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::lessequal;
         }
-        else if (*BufferPtr == '=' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '=' && *(BufferPtr + 1) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::equalequal;
         }
-        else if (*BufferPtr == '!' && *(BufferPtr + 2) == '='){
+        else if (*BufferPtr == '!' && *(BufferPtr + 1) == '='){
             mode = 2;            
             Token::TokenKind kind = Token::notqeual;
         }
