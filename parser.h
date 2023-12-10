@@ -36,15 +36,11 @@ class Parser {
     }
 
     AST *parseGoal();
-    Expr *parseOperator();
-    Expr *parseOperatorCondition();
     Expr *parseEquation();
     Expr *parseExpr();
     Expr *parseTerm();
     Expr *parseFactor();
     Expr *parseFinal();
-    Expr *parseId();
-    Expr *parseNum();
     Expr *parseCondition();
     Expr *parseIf();
     Expr *parseElif();
