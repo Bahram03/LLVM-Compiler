@@ -139,60 +139,19 @@ public:
   }
 };
 
-// Assignment class represents an assignment expression in the AST
-class Assignment : public Expr
-{
-  public:
-  enum Operator
-  {
-    equal,
-    plusequal,
-    minusequal,
-    starequal,
-    slashequal,
-    percentequal
-  };
-private:
-  Final *Left;                             // Left-hand side final (identifier : later should be check in semantic)
-  Expr *Right;                              // Right-hand side expression
-  Operator Op;
-
-
-public:
-  Assignment(Operator Op, Factor *L, Expr *R) : Op(op), Left(L), Right(R) {}
-
-  Factor *getLeft() { return Left; }
-
-  Expr *getRight() { return Right; }
-
-  Operator getOperator() { return Op; }
-
-  virtual void accept(ASTVisitor &V) override
-  {
-    V.visit(*this);
-  }
-};
 
 // Declaration class represents a variable declaration with an initializer in the AST
 class Declaration : public Expr
 {
   private:
-    using VarVector = llvm::SmallVector<llvm::StringRef, 8>;
-    using ExprVector = llvm::SmallVector<Expr*>;
-    VarVector Vars;                           // Stores the list of variables
-    ExprVector Exprs;                         // Stores the list of expressions
+    llvm::SmallVector<llvm::StringRef, 8> Vars;
+    llvm::SmallVector<Expr*> Exprs;
 
 public:
   Declaration(VarVector Vars, ExprVector Exprs) : Vars(Vars), Exprs(Exprs), Expr() {}
 
-  VarVector::const_iterator begin() { return Vars.begin(); }
-
-  VarVector::const_iterator end() { return Vars.end(); }
-
-  ExprVector::const_iterator begin() { return Exprs.begin(); }
-
-  ExprVector::const_iterator end() { return Exprs.end(); }
-
+  llvm::SmallVector<llvm::StringRef, 8> getVars() { return Vars; }
+  llvm::SmallVector<Expr*> getExprs() { return Exprs; }
 
   virtual void accept(ASTVisitor &V) override
   {
