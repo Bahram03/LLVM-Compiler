@@ -29,15 +29,25 @@ class Parser {
 
     bool consume(Token::TokenKind Kind) 
     {
-        if (expect(Kind)) { return true; }
+        if (expect(Kind))
+            return true;
         advance();
         return false;
     }
 
-    AST *parseCalc();
+    AST *parseGoal();
+    Expr *parseDec();
+    Expr *parseEquation();
     Expr *parseExpr();
     Expr *parseTerm();
     Expr *parseFactor();
+    Expr *parseFinal();
+    Expr *parseCondition();
+    Expr *parseIf();
+    Expr *parseElif();
+    Expr *parseElse();
+    Expr *parseC();
+    Expr *parseLoop();
 
     public:
     Parser(Lexer &Lex) : Lex(Lex), HasError(false) { advance(); }
