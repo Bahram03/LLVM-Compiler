@@ -180,9 +180,11 @@ class Equation : public AST
   public:
     Equation(Final *Id, Expr *E, Operator Op) : Id(Id), E(E), Op(Op) {}
     
-      Final *getId() { return Id; }
+    Final *getId() { return Id; }
 
-      Expr *getE() { return E; }
+    Expr *getE() { return E; }
+
+    Operator getOp(){return Op;}
 
 }
 
