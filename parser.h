@@ -36,6 +36,7 @@ class Parser {
     }
 
     AST *parseGoal();
+    Expr *parseDec();
     Expr *parseEquation();
     Expr *parseExpr();
     Expr *parseTerm();
