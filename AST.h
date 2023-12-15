@@ -111,12 +111,12 @@ class BinaryOp : public Expr
 public:
   enum Operator
   {
-    Plus,
-    Minus,
-    Mul,
-    Div,
-    Mod,
-    Pow
+    plus,
+    minus,
+    star,
+    slash,
+    percent,
+    pow
   };
 
 private:
@@ -193,8 +193,8 @@ class C : public AST
   public:
     enum LogicOp
     {
-      And,
-      Or
+      KW_and,
+      KW_or
     };
   private:
     C *Left;
