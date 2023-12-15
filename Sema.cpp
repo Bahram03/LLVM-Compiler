@@ -22,7 +22,7 @@ public:
 
   bool hasError() { return HasError; } // Function to check if an error occurred
 
-  // Visit function for GSM nodes
+  // Visit function for main nodes
   virtual void visit(Goal &Node) override { 
     for (auto I = Node.begin(), E = Node.end(); I != E; ++I)
     {
@@ -32,7 +32,7 @@ public:
 
   // Visit function for Factor nodes
   virtual void visit(Final &Node) override {
-    if (Node.getKind() == Final::Ident) {
+    if (Node.getKind() == Final::Id) {
       // Check if identifier is in the scope
       if (Scope.find(Node.getVal()) == Scope.end())
         error(Not, Node.getVal());
@@ -52,10 +52,10 @@ public:
     else
       HasError = true;
 
-    if (Node.getOperator() == Expression::Operator::Div && right) {
+    if (Node.getOperator() == Expression::BinaryOp::slash && right) {
       Factor * f = (Factor *)right;
       
-      if (right && f->getKind() == Final::ValueKind::Number) {
+      if (right && f->getKind() == Final::ValueKind::Num) {
         int intval;
         f->getVal().getAsInteger(10, intval);
 
