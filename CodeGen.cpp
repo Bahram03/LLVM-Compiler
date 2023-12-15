@@ -18,6 +18,9 @@ namespace
     Type *Int8PtrTy;
     Type *Int8PtrPtrTy;
     Constant *Int32Zero;
+    Constant *Int32One;
+    Function *CalcWriteFn;
+    FunctionType *CalcWriteFnTy;    
 
     Value *V;
     StringMap<AllocaInst *> nameMap;
@@ -32,6 +35,8 @@ namespace
       Int8PtrTy = Type::getInt8PtrTy(M->getContext());
       Int8PtrPtrTy = Int8PtrTy->getPointerTo();
       Int32Zero = ConstantInt::get(Int32Ty, 0, true);
+      CalcWriteFnTy = FunctionType::get(VoidTy, {Int32Ty}, false);
+      CalcWriteFn = Function::Create(CalcWriteFnTy, GlobalValue::ExternalLinkage, "main_write", M);
     }
 
     // Entry point for generating LLVM IR from the AST.
