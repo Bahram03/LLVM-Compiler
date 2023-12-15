@@ -119,7 +119,7 @@ virtual void visit(Equation &Node) override {
 
     virtual void visit(Final &Node) override
     {
-      if (Node.getKind() == Factor::Ident)
+      if (Node.getKind() == Factor::Id)
       {
         // If the factor is an identifier, load its value from memory.
         V = Builder.CreateLoad(Int32Ty, nameMap[Node.getVal()]);
