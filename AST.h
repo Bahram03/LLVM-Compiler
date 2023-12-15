@@ -7,6 +7,7 @@
 // Forward declarations of classes used in the AST
 class AST;
 class Expr;
+class Statement;
 class Goal;
 class BinaryOp;
 class Declaration;
@@ -27,7 +28,8 @@ public:
   // Virtual visit functions for each AST node type
   virtual void visit(AST &) {}             
   virtual void visit(Expr &) {}             
-  virtual void visit(Goal &) = 0;            
+  virtual void visit(Goal &) = 0; 
+  virtual void visit(Statement &) = 0;           
   virtual void visit(Factor &) = 0;         
   virtual void visit(BinaryOp &) = 0;  
   virtual void visit(Assignment &) = 0;      
@@ -55,27 +57,49 @@ public:
   Expr() {}
 };
 
-// Goal class represents a group of expressions in the AST
+// Goal class represents a group of statements in the AST
 class Goal : public Expr
 {
-  using ExprVector = llvm::SmallVector<Expr *>;
 
 private:
-  ExprVector exprs;                          // Stores the list of expressions
+  lvm::SmallVector<Statement *> statements;                          // Stores the list of statements
 
 public:
-  Goal(llvm::SmallVector<Expr *> exprs) : exprs(exprs) {}
+  Goal(llvm::SmallVector<Statement *> statements) : statements(statements) {}
 
-  llvm::SmallVector<Expr *> getExprs() { return exprs; }
+  llvm::SmallVector<Statement *> getStatements() { return statements; }
 
-  ExprVector::const_iterator begin() { return exprs.begin(); }
+  ExprVector::const_iterator begin() { return statements.begin(); }
 
-  ExprVector::const_iterator end() { return exprs.end(); }
+  ExprVector::const_iterator end() { return statements.end(); }
 
   virtual void accept(ASTVisitor &V) override
   {
     V.visit(*this);
   }
+};
+
+class Statement : public AST
+{
+public:
+    enum StatementType
+    {
+        Declaration,
+        Assignment,
+        If,
+        Loop
+    };
+
+private:
+    StatementType Type;
+
+public:
+    StatementType getKind(){return Type;}
+    Statement(StatementType type) : Type(type) {}
+    virtual void accept(ASTVisitor &V) override
+    {
+        V.visit(*this);
+    }
 };
 
 // Final class represents a final in the AST (either an identifier or a number)
@@ -141,7 +165,7 @@ public:
 
 
 // Declaration class represents a variable declaration with an initializer in the AST
-class Declaration : public Expr
+class Declaration : public Statement
 {
   private:
     llvm::SmallVector<llvm::StringRef, 8> Vars;
@@ -159,7 +183,7 @@ public:
   }
 };
 
-class Equation : public AST
+class Equation : public Statement
 {
   public:
     enum Operator
@@ -242,7 +266,7 @@ class Condition : public C
     }
 }
 
-class If : public AST
+class If : public Statement
 {
   private:
     C* conditions;
@@ -295,7 +319,7 @@ class Elif : public If
     }
 }
 
-class Loop : public AST
+class Loop : public Statement
 {
   private: 
     C* conditions;
