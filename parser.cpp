@@ -121,9 +121,9 @@ Expr *parseEquation()
     
         //Tok.is(Token::star) ? BinaryOp::star : BinaryOp::slash;
         if (Tok.is(Token::plus)) 
-            Op = BinaryOp::Operator::Plus;
+            Op = BinaryOp::Operator::plus;
         else if (Tok.is(Token::minus))  
-            Op =  BinaryOp::Operator::Minus;
+            Op =  BinaryOp::Operator::minus;
         else if (Tok.is(Token::equal))  
             Op =  BinaryOp::Operator::equal;
         else if (Tok.is(Token::power))  
@@ -178,7 +178,7 @@ Expr *Parser::parseTerm()
             else if (Tok.is(Token::slash))  
                 Op =  BinaryOp::Operator::slash;
             else if (Tok.is(Token::KW_mod))  
-                Op =  BinaryOp::Operator::KW_mod;  
+                Op =  BinaryOp::Operator::percent;  
         advance();
         Expr *Right = parseFactor();
         Left = new BinaryOp(Op, Left, Right);
